@@ -41,4 +41,10 @@
   .bg-warm-bg {
     background-color: var(--color-warm-bg);
   }
+  
+  /* Watercolor blob shapes for invitation */
+  .watercolor-blob {
+    filter: blur(40px);
+    mix-blend-mode: multiply;
+  }
 }
