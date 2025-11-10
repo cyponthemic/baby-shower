@@ -4,26 +4,32 @@ export default function RSVPForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const handleSubmit = event => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setIsSubmitting(true);
+    setSubmitError(null);
   
-    const myForm = event.target;
+    const myForm = event.currentTarget;
     const formData = new FormData(myForm);
+  
+    // Convert FormData to URL-encoded string
+    const params = new URLSearchParams();
+    formData.forEach((value, key) => {
+      params.append(key, value.toString());
+    });
   
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(formData).toString()
+      body: params.toString()
     })
       .then(() => {
-          window.location.href = "/thanks.html";
-          return;
-      })
-      .catch(error => {
-          setSubmitError(error.message);
-          return;
-      })
-      .finally(() => setIsSubmitting(false));
+        window.location.href = "/thanks.html";
+    })
+    .catch((error: Error) => {
+        setSubmitError(error.message || "Something went wrong. Please try again.");
+        setIsSubmitting(false);
+    });
   };
 
   return (
