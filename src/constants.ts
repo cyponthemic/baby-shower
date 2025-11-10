@@ -1,11 +1,11 @@
 export const EVENT = {
   hosts: {
-    first: "belle",
-    second: "alex",
-    full: "belle & alex",
+    first: "Belle",
+    second: "Alex",
+    full: "Belle & Alex",
   },
   title: "PARENT PICNIC",
-  tagline: "bring a camping chair & a picnic rug, & come send us off to parenthood",
+  tagline: "Bring a camping chair & a picnic rug, & come send us off to parenthood",
   date: {
     day: "Saturday",
     dayNumber: 1,

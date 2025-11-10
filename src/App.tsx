@@ -50,7 +50,7 @@ function App() {
             {/* Text content */}
             <div className="relative h-full flex flex-col justify-between p-8 md:p-12">
               {/* Top right text */}
-              <div className="self-end text-right">
+              <div className="self-start text-left">
                 <p className="text-xs md:text-sm text-gray-800 font-light">{EVENT.hosts.full}</p>
                 <p className="text-xs md:text-sm text-gray-800 font-light">are throwing a</p>
               </div>
@@ -71,7 +71,7 @@ function App() {
               </div>
               
               {/* Bottom left text */}
-              <div className="self-start">
+              <div className="self-end text-right">
                 <p className="text-xs md:text-sm text-gray-800 font-light">{COPY.invitation.dateLine}</p>
                 <p className="text-xs md:text-sm text-gray-800 font-light">{COPY.invitation.timeLocationLine}</p>
               </div>

@@ -91,10 +91,10 @@ export default function RSVPForm({ onSuccess }: RSVPFormProps) {
           <textarea
             id="food"
             name="food_requirements"
-            placeholder="Veggie / vegan / allergies / anything else we should know"
+            
             className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all text-sm min-h-[100px] resize-y"
           />
-          <p className="text-xs text-gray-500">Leave blank if you're easy.</p>
+          
         </div>
 
         <button
