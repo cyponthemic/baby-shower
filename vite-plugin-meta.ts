@@ -10,7 +10,7 @@ export function metaTagsPlugin(siteUrl: string = 'https://your-site-url.netlify.
     transformIndexHtml(html) {
       const description = `${EVENT.hosts.full} are throwing a ${EVENT.title}. ${EVENT.tagline}. ${EVENT.date.day} ${EVENT.date.dayNumber} ${EVENT.date.month}, ${EVENT.date.time} at ${EVENT.location}.`;
       const title = `${EVENT.title} - RSVP`;
-      const imageUrl = `${siteUrl}/parent-picnic-invitation.jpg`;
+      const imageUrl = `${siteUrl}/parent-picnic-invitation.png`;
 
       const metaTags = `
     <!-- Primary Meta Tags -->
