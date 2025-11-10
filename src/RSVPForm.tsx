@@ -44,7 +44,8 @@ export default function RSVPForm() {
         data-netlify="true"
         action="/thanks.html"
         className="space-y-6"
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit}    
+        
       >
         <input type="hidden" name="form-name" value="baby-shower-rsvp" />
 
