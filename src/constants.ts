@@ -47,7 +47,7 @@ export const COPY = {
   },
   thanks: {
     title: "Thanks for your RSVP 💌",
-    message: "We've received your details and can't wait to see you at the parent picnic.",
+    message: "We've received your details and can't wait to see you at the picnic.",
     calendarPrompt: "Add it to your calendar so you don't forget:",
     calendarButton: "Add to calendar",
     dateLine: `${EVENT.date.day} ${EVENT.date.dayNumber} ${EVENT.date.month}, ${EVENT.date.time}`,
