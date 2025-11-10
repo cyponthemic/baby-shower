@@ -1,6 +1,11 @@
 import { useState } from "react";
+import { EVENT } from "./constants";
 
-export default function RSVPForm() {
+interface RSVPFormProps {
+  onSuccess?: () => void;
+}
+
+export default function RSVPForm({ onSuccess }: RSVPFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
@@ -24,7 +29,11 @@ export default function RSVPForm() {
       body: params.toString()
     })
       .then(() => {
-        window.location.href = "/thanks.html";
+        if (onSuccess) {
+          onSuccess();
+        } else {
+          window.location.href = "/thanks.html";
+        }
     })
     .catch((error: Error) => {
         setSubmitError(error.message || "Something went wrong. Please try again.");
@@ -39,15 +48,14 @@ export default function RSVPForm() {
       </h2>
 
       <form
-        name="baby-shower-rsvp"
+        name={EVENT.formName}
         method="POST"
         data-netlify="true"
         action="/thanks.html"
         className="space-y-6"
-        onSubmit={handleSubmit}    
-        
+        onSubmit={handleSubmit}
       >
-        <input type="hidden" name="form-name" value="baby-shower-rsvp" />
+        <input type="hidden" name="form-name" value={EVENT.formName} />
 
         <div className="space-y-2">
           <label htmlFor="name" className="block text-sm font-medium text-gray-700">
