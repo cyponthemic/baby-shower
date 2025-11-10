@@ -86,7 +86,7 @@ export default function RSVPForm({ onSuccess }: RSVPFormProps) {
 
         <div className="space-y-2">
           <label htmlFor="food" className="block text-sm font-medium text-gray-700">
-            Food requirements / notes
+            Dietries
           </label>
           <textarea
             id="food"
@@ -102,7 +102,7 @@ export default function RSVPForm({ onSuccess }: RSVPFormProps) {
           disabled={isSubmitting}
           className="w-full py-4 rounded-full bg-gray-800 text-white font-medium hover:bg-gray-700 transition-all duration-200 text-base disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {isSubmitting ? "Sending..." : "Send RSVP"}
+          {isSubmitting ? "Sending..." : "RSVP"}
         </button>
 
         {submitError && (
@@ -111,11 +111,8 @@ export default function RSVPForm({ onSuccess }: RSVPFormProps) {
           </p>
         )}
 
-        <p className="text-xs text-gray-400 text-center pt-2">
-          We're keeping this invite paperless and simple – thanks for RSVPing 💛
-        </p>
         <p className="text-xs text-gray-400 text-center">
-          Please RSVP so we can plan food and drinks.
+          please RSVP so we can plan food
         </p>
       </form>
     </section>
