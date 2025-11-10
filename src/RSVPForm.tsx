@@ -86,7 +86,7 @@ export default function RSVPForm({ onSuccess }: RSVPFormProps) {
 
         <div className="space-y-2">
           <label htmlFor="food" className="block text-sm font-medium text-gray-700">
-            Dietries
+            Dietaries
           </label>
           <textarea
             id="food"
