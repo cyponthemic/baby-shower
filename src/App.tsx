@@ -2,6 +2,8 @@ import { useState } from "react";
 
 function App() {
   const [showForm, setShowForm] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   if (!showForm) {
     return (
@@ -75,6 +77,40 @@ function App() {
     );
   }
 
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      // Convert FormData to URL-encoded string
+      const params = new URLSearchParams();
+      formData.forEach((value, key) => {
+        params.append(key, value.toString());
+      });
+
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: params.toString(),
+      });
+
+      if (response.ok) {
+        // Redirect to thanks page on success
+        window.location.href = "/thanks.html";
+      } else {
+        throw new Error("Form submission failed");
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setSubmitError("Something went wrong. Please try again.");
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen w-full flex items-center justify-center p-6 watercolor-bg">
       <div className="w-full max-w-2xl bg-white rounded-3xl shadow-2xl p-12 md:p-16 space-y-8">
@@ -117,6 +153,7 @@ function App() {
             data-netlify="true"
             action="/thanks.html"
             className="space-y-6"
+            onSubmit={handleSubmit}
           >
             <input type="hidden" name="form-name" value="baby-shower-rsvp" />
 
@@ -162,10 +199,17 @@ function App() {
 
             <button
               type="submit"
-              className="w-full py-4 rounded-full bg-gray-800 text-white font-medium hover:bg-gray-700 transition-all duration-200 text-base"
+              disabled={isSubmitting}
+              className="w-full py-4 rounded-full bg-gray-800 text-white font-medium hover:bg-gray-700 transition-all duration-200 text-base disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Send RSVP
+              {isSubmitting ? "Sending..." : "Send RSVP"}
             </button>
+
+            {submitError && (
+              <p className="text-xs text-red-500 text-center pt-2">
+                {submitError}
+              </p>
+            )}
 
             <p className="text-xs text-gray-400 text-center pt-2">
               We're keeping this invite paperless and simple – thanks for RSVPing 💛
