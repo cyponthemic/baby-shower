@@ -27,11 +27,11 @@ function App() {
             }}
           >
             {/* Text content */}
-            <div className="relative h-full flex flex-col  justify-between p-12">
+            <div className="relative h-full flex flex-col  justify-between p-6 md:p-12">
               {/* Top right text */}
-              <div className="self-end text-left pt-8">
-                <p className="text-lg text-gray-900 font-extrabold">{EVENT.hosts.full}</p>
-                <p className="text-lg text-gray-900 font-extrabold">are throwing a</p>
+              <div className="self-end text-left md:pt-8">
+                <p className="landing-copy">{EVENT.hosts.full}</p>
+                <p className="landing-copy">are throwing a</p>
               </div>
               
               {/* Center content */}
@@ -39,7 +39,7 @@ function App() {
                 <h1 className="font-serif text-6xl sm:text-8xl lg:text-7xl font-bold text-gray-900 leading-tight">
                   {EVENT.title}
                 </h1>
-                <p className="text-lg text-gray-700 font-extrabold max-w-md leading-relaxed">
+                <p className="landing-copy max-w-md leading-relaxed text-gray-700">
                   {EVENT.tagline.split(",").map((part, i, arr) => (
                     <span key={i}>
                       {part.trim()}
@@ -51,8 +51,8 @@ function App() {
               
               {/* Bottom left text */}
               <div className="self-end text-right">
-                <p className="text-lg text-gray-800 font-extrabold">{COPY.invitation.dateLine}</p>
-                <p className="text-lg text-gray-800 font-extrabold">{COPY.invitation.timeLocationLine}</p>
+                <p className="landing-copy text-gray-800">{COPY.invitation.dateLine}</p>
+                <p className="landing-copy text-gray-800">{COPY.invitation.timeLocationLine}</p>
               </div>
             </div>
           </div>

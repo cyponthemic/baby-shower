@@ -47,4 +47,9 @@
     filter: blur(40px);
     mix-blend-mode: multiply;
   }
+  
+  /* Common class for landing page copy text */
+  .landing-copy {
+    @apply text-sm md:text-lg text-gray-900 font-extrabold;
+  }
 }
