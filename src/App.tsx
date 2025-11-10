@@ -1,9 +1,8 @@
 import { useState } from "react";
+import RSVPForm from "./RSVPForm";
 
 function App() {
   const [showForm, setShowForm] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState<string | null>(null);
 
   if (!showForm) {
     return (
@@ -77,40 +76,6 @@ function App() {
     );
   }
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setIsSubmitting(true);
-    setSubmitError(null);
-
-    const form = event.currentTarget;
-    const formData = new FormData(form);
-
-    try {
-      // Convert FormData to URL-encoded string
-      const params = new URLSearchParams();
-      formData.forEach((value, key) => {
-        params.append(key, value.toString());
-      });
-
-      const response = await fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: params.toString(),
-      });
-
-      if (response.ok) {
-        // Redirect to thanks page on success
-        window.location.href = "/thanks.html";
-      } else {
-        throw new Error("Form submission failed");
-      }
-    } catch (error) {
-      console.error("Form submission error:", error);
-      setSubmitError("Something went wrong. Please try again.");
-      setIsSubmitting(false);
-    }
-  };
-
   return (
     <div className="min-h-screen w-full flex items-center justify-center p-6 watercolor-bg">
       <div className="w-full max-w-2xl bg-white rounded-3xl shadow-2xl p-12 md:p-16 space-y-8">
@@ -142,83 +107,7 @@ function App() {
           </div>
         </section>
 
-        <section className="pt-4 space-y-6">
-          <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wider">
-            RSVP
-          </h2>
-
-          <form
-            name="baby-shower-rsvp"
-            method="POST"
-            data-netlify="true"
-            action="/thanks.html"
-            className="space-y-6"
-            onSubmit={handleSubmit}
-          >
-            <input type="hidden" name="form-name" value="baby-shower-rsvp" />
-
-            <div className="space-y-2">
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                Your name
-              </label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                required
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all text-sm"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                inputMode="email"
-                required
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all text-sm"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label htmlFor="food" className="block text-sm font-medium text-gray-700">
-                Food requirements / notes
-              </label>
-              <textarea
-                id="food"
-                name="food_requirements"
-                placeholder="Veggie / vegan / allergies / anything else we should know"
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all text-sm min-h-[100px] resize-y"
-              />
-              <p className="text-xs text-gray-500">Leave blank if you're easy.</p>
-            </div>
-
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full py-4 rounded-full bg-gray-800 text-white font-medium hover:bg-gray-700 transition-all duration-200 text-base disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {isSubmitting ? "Sending..." : "Send RSVP"}
-            </button>
-
-            {submitError && (
-              <p className="text-xs text-red-500 text-center pt-2">
-                {submitError}
-              </p>
-            )}
-
-            <p className="text-xs text-gray-400 text-center pt-2">
-              We're keeping this invite paperless and simple – thanks for RSVPing 💛
-            </p>
-            <p className="text-xs text-gray-400 text-center">
-              Please RSVP so we can plan food and drinks.
-            </p>
-          </form>
-        </section>
+        <RSVPForm />
       </div>
     </div>
   );

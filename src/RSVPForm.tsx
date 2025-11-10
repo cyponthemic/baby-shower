@@ -1,0 +1,109 @@
+import { useState } from "react";
+
+export default function RSVPForm() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const handleSubmit = event => {
+    event.preventDefault();
+  
+    const myForm = event.target;
+    const formData = new FormData(myForm);
+  
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(formData).toString()
+    })
+      .then(() => {
+          window.location.href = "/thanks.html";
+          return;
+      })
+      .catch(error => {
+          setSubmitError(error.message);
+          return;
+      })
+      .finally(() => setIsSubmitting(false));
+  };
+
+  return (
+    <section className="pt-4 space-y-6">
+      <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wider">
+        RSVP
+      </h2>
+
+      <form
+        name="baby-shower-rsvp"
+        method="POST"
+        data-netlify="true"
+        action="/thanks.html"
+        className="space-y-6"
+        onSubmit={handleSubmit}
+      >
+        <input type="hidden" name="form-name" value="baby-shower-rsvp" />
+
+        <div className="space-y-2">
+          <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+            Your name
+          </label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            required
+            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all text-sm"
+          />
+        </div>
+
+        <div className="space-y-2">
+          <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            Email
+          </label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            inputMode="email"
+            required
+            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all text-sm"
+          />
+        </div>
+
+        <div className="space-y-2">
+          <label htmlFor="food" className="block text-sm font-medium text-gray-700">
+            Food requirements / notes
+          </label>
+          <textarea
+            id="food"
+            name="food_requirements"
+            placeholder="Veggie / vegan / allergies / anything else we should know"
+            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all text-sm min-h-[100px] resize-y"
+          />
+          <p className="text-xs text-gray-500">Leave blank if you're easy.</p>
+        </div>
+
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="w-full py-4 rounded-full bg-gray-800 text-white font-medium hover:bg-gray-700 transition-all duration-200 text-base disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {isSubmitting ? "Sending..." : "Send RSVP"}
+        </button>
+
+        {submitError && (
+          <p className="text-xs text-red-500 text-center pt-2">
+            {submitError}
+          </p>
+        )}
+
+        <p className="text-xs text-gray-400 text-center pt-2">
+          We're keeping this invite paperless and simple – thanks for RSVPing 💛
+        </p>
+        <p className="text-xs text-gray-400 text-center">
+          Please RSVP so we can plan food and drinks.
+        </p>
+      </form>
+    </section>
+  );
+}
+
