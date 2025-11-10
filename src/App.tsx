@@ -69,7 +69,7 @@ function App() {
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center p-6 watercolor-bg">
-      <div className="w-full max-w-2xl bg-white rounded-3xl shadow-2xl p-12 md:p-16 space-y-8">
+      <div className="w-full max-w-2xl bg-white rounded-3xl shadow-2xl p-6 md:p-16 space-y-8">
         <header className="text-center space-y-3">
           <p className="text-sm text-gray-600 font-light tracking-wide uppercase">
             {COPY.invitation.hostsLine}
@@ -92,11 +92,11 @@ function App() {
             Event details
           </h2>
           <div className="bg-gray-50 rounded-2xl p-6 space-y-3 text-sm">
-            <div className="flex justify-between">
+            <div className="flex flex-col md:flex-row md:justify-between gap-1 md:gap-0">
               <span className="font-medium text-gray-700">{COPY.form.dateLabel}</span>
               <span className="text-gray-600">{COPY.form.dateValue}</span>
             </div>
-            <div className="flex justify-between">
+            <div className="flex flex-col md:flex-row md:justify-between gap-1 md:gap-0">
               <span className="font-medium text-gray-700">{COPY.form.locationLabel}</span>
               <span className="text-gray-600">{COPY.form.locationValue}</span>
             </div>
