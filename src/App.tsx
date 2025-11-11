@@ -6,7 +6,19 @@ import { EVENT, COPY } from "./constants";
 type View = "invitation" | "form" | "thanks";
 
 function App() {
-  const [view, setView] = useState<View>("invitation");
+  // Development helper: check query string for forced view
+  const getInitialView = (): View => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const viewParam = params.get("view");
+      if (viewParam === "landing") return "invitation";
+      if (viewParam === "form") return "form";
+      if (viewParam === "thanks") return "thanks";
+    }
+    return "invitation";
+  };
+
+  const [view, setView] = useState<View>(getInitialView());
 
   if (view === "thanks") {
     return <Thanks />;
